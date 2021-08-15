@@ -17,21 +17,25 @@ export default function DashboardSidebar() {
       icon: ViewGridIcon,
       tooltip: 'Dashboard',
       special: true,
+      url: '/dashboard',
     },
     {
       special: false,
       icon: BookmarkAltIcon,
       tooltip: 'Materiais',
+      url: '/resources',
     },
     {
       special: false,
       icon: CalendarIcon,
       tooltip: 'Horários',
+      url: '/schedule',
     },
     {
       special: false,
       icon: ClipboardListIcon,
       tooltip: 'Atividades',
+      url: '/tasks',
     },
   ]
 
@@ -43,12 +47,15 @@ export default function DashboardSidebar() {
           icon={<element.icon className="w-8 h-8" />}
           tooltip={element.tooltip}
           special={element.special}
+          url={element.url}
         />
       ))}
       <DashboardSidebarItem
         className={'ml-auto md:mt-auto'}
         icon={<LogoutIcon className="w-8 h-8" />}
         tooltip={'Sair'}
+        special={false}
+        url="/"
       />
     </nav>
   )

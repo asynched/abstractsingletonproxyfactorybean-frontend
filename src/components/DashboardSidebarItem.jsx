@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import DashboardSidebarItemTooltip from './DashboardSidebarItemTooltip'
 
 /**
@@ -10,9 +11,11 @@ export default function DashboardSidebarItem({
   tooltip,
   className,
   special,
+  url,
 }) {
   return (
-    <button
+    <Link
+      to={url}
       className={`${
         className ? className : ''
       } group w-16 h-16 relative flex items-center justify-center text-white ${
@@ -21,7 +24,7 @@ export default function DashboardSidebarItem({
     >
       {icon}
       <DashboardSidebarItemTooltip text={tooltip} />
-    </button>
+    </Link>
   )
 }
 
@@ -32,4 +35,5 @@ export default function DashboardSidebarItem({
  * @property {string} tooltip Item tooltip text
  * @property {string} [className] Adicional item classes
  * @property {boolean} [special] Boolean value indicating if the item should be rendered in a different color
+ * @property {string} url URL to redirect the user to
  */
