@@ -1,8 +1,11 @@
 import { useContext } from 'react'
 import { AuthContext } from '@contexts/AuthContext'
-import DashboardLayout from '@layouts/DashboardLayout'
+import MainLayout from '@layouts/MainLayout'
 import DashboardHeading from '@components/DashboardHeading'
 import DashboardTasksSection from '@components/DashboardTasksSection'
+import DashboardClassesSection from '@components/DashboardClassesSection'
+import DashboardDiscordBanner from '@components/DashboardDiscordBanner'
+import DashboardNoticeSection from '@components/DashboardNoticeSection'
 
 export default function Dashboard() {
   const { state } = useContext(AuthContext)
@@ -18,6 +21,8 @@ export default function Dashboard() {
       teacher: {
         name: 'Nathan Cirillo',
         profileUrl: '/123',
+        imageUrl:
+          'https://scontent-gru1-2.xx.fbcdn.net/v/t1.18169-9/599576_459283684139757_2071092628_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=cdbe9c&_nc_ohc=XwcrdTI2tAoAX-Vevsx&_nc_ht=scontent-gru1-2.xx&oh=532ea05c57382a2987b8b279d7e07ed0&oe=613D0D3D',
       },
     },
     {
@@ -30,6 +35,35 @@ export default function Dashboard() {
       teacher: {
         name: 'Gerson Pastre',
         profileUrl: '/666',
+        imageUrl:
+          'https://i1.rgstatic.net/ii/profile.image/740697980301319-1553607568796_Q128/Gerson-Oliveira.jpg',
+      },
+    },
+    {
+      id: 3,
+      title: 'Atividades Práticas Supervisionadas',
+      description:
+        'Atividades práticas supervisionadas do 4° semestre: Implementação de uma aplicação de pqp que negócio chatokkk',
+      attachments: 'https://youtube.com/',
+      dueDate: '23/11/2021',
+      teacher: {
+        name: 'Gerson Pastre',
+        profileUrl: '/666',
+        imageUrl:
+          'https://i1.rgstatic.net/ii/profile.image/740697980301319-1553607568796_Q128/Gerson-Oliveira.jpg',
+      },
+    },
+    {
+      id: 4,
+      title: 'Lista de Banco de Dados',
+      description: 'Lista de banco de dados sobre PL-SQL e suas aplicações',
+      attachments: 'https://google.com',
+      dueDate: '15/08/2021',
+      teacher: {
+        name: 'Télvio Orrú',
+        profileUrl: '/333',
+        imageUrl:
+          'https://igormiranda.com.br/wp-content/uploads/2021/07/joey-jordison-slipknot.jpg',
       },
     },
   ]
@@ -60,47 +94,20 @@ export default function Dashboard() {
   ]
 
   return (
-    <DashboardLayout>
+    <MainLayout>
       <DashboardHeading name={state.user.name} />
-      <div className="grid grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
         <DashboardTasksSection tasks={tasks} />
-        <section className="col-span-4">
-          <div>
-            <h1 className="mb-4 text-4xl tracking-tighter font-bold">
-              Aulas hoje
-            </h1>
-            <div className="mb-8 grid grid-cols-2 gap-4">
-              {classes.map(cls => (
-                <a
-                  href={cls.url}
-                  target="_blank"
-                  key={cls.id}
-                  className="py-2 px-4 border rounded transition transform duration-300 hover:-translate-y-1 hover:shadow-lg"
-                >
-                  <h2 className="text-2xl font-bold tracking-tighter">
-                    {cls.name}
-                  </h2>
-                  <p className="mb-2">
-                    <span className="font-semibold">Horário:</span>{' '}
-                    {cls.schedule}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <img
-                      className="w-6 h-6 rounded-full"
-                      src={cls.teacher.imageUrl}
-                      alt={cls.teacher.name}
-                    />
-                    <p>{cls.teacher.name}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h1 className="text-4xl tracking-tighter font-bold">Links</h1>
-          </div>
+        <section className="md:col-span-4">
+          <DashboardClassesSection classes={classes} />
+          {/* Avisos */}
+          <DashboardNoticeSection />
+          {/* Discord */}
+          <DashboardDiscordBanner />
+          {/* Add another section, maybe? */}
+          <div className="mt-8 grid grid-cols-2 gap-4"></div>
         </section>
       </div>
-    </DashboardLayout>
+    </MainLayout>
   )
 }
