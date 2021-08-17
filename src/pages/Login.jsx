@@ -1,6 +1,7 @@
 import { useReducer } from 'react'
 import { dispatchAction } from '@lib/dispatch'
 import { handleFieldChange, preventDefault } from '@lib/ui-events'
+import { loginUser } from '@services/graphql'
 
 const INITIAL_STATE = {
   username: '',
@@ -19,10 +20,15 @@ const loginReducer = (state, action) => {
 export default function Login() {
   const [state, dispatch] = useReducer(loginReducer, INITIAL_STATE)
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const { username, password } = state
 
     console.log(username, password)
+
+    const [data, error] = await loginUser(username, password)
+
+    console.log(data)
+    console.log(error)
   }
 
   return (
@@ -38,7 +44,7 @@ export default function Login() {
           Login
         </h2>
         <div className="flex flex-col">
-          <label className="mb-2 text-lg font-semibold" for="user">
+          <label className="mb-2 text-lg font-semibold" htmlFor="user">
             Usuário
           </label>
           <input
@@ -52,7 +58,7 @@ export default function Login() {
             )}
           />
         </div>
-        <label className="mb-2 text-lg font-semibold" for="password">
+        <label className="mb-2 text-lg font-semibold" htmlFor="password">
           Senha
         </label>
         <input

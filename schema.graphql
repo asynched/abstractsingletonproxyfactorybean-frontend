@@ -1,0 +1,107 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type ClassType {
+  id: UUID!
+  name: String!
+  description: String!
+  teacher: TeacherType!
+  lessonSet: [LessonType!]!
+  resourceSet: [ResourceType!]!
+  noticeSet: [NoticeType!]!
+}
+
+scalar Date
+
+scalar GenericScalar
+
+type LessonType {
+  id: UUID!
+  cls: ClassType!
+  schedule: String!
+  weekDay: LessonWeekday!
+}
+
+enum LessonWeekday {
+  SEG
+  TER
+  QUA
+  QUI
+  SEX
+}
+
+type Mutation {
+  tokenAuth(username: String!, password: String!): ObtainJSONWebToken
+  verifyToken(token: String): Verify
+  refreshToken(token: String): Refresh
+}
+
+type NoticeType {
+  id: UUID!
+  title: String!
+  text: String!
+  cls: ClassType!
+}
+
+type ObtainJSONWebToken {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+}
+
+type Query {
+  allTasks: [TaskType]
+  allTeachers: [TeacherType]
+  allClasses: [ClassType]
+  allLessons(token: String!): [LessonType]
+  allNotices: [NoticeType]
+  allResources: [ResourceType]
+  task(uuid: UUID!): TaskType
+  teacher(uuid: UUID!): TeacherType
+  clazz(uuid: UUID!): ClassType
+  lesson(uuid: UUID!): LessonType
+  notice(uuid: UUID!): NoticeType
+  resource(uuid: UUID!): ResourceType
+  lessonByDay(day: String!): [LessonType]
+}
+
+type Refresh {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+}
+
+type ResourceType {
+  id: UUID!
+  name: String!
+  description: String!
+  url: String!
+  cls: ClassType!
+}
+
+type TaskType {
+  id: UUID!
+  title: String!
+  description: String!
+  attachments: String!
+  teacher: TeacherType!
+  dueDate: Date!
+}
+
+type TeacherType {
+  id: UUID!
+  name: String!
+  imageUrl: String!
+  email: String!
+  about: String!
+  taskSet: [TaskType!]!
+  classSet: [ClassType!]!
+}
+
+scalar UUID
+
+type Verify {
+  payload: GenericScalar!
+}
