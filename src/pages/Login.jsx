@@ -1,11 +1,16 @@
-import { useReducer } from 'react'
+import { useReducer, useEffect, useContext } from 'react'
 import { dispatchAction } from '@lib/dispatch'
 import { handleFieldChange, preventDefault } from '@lib/ui-events'
-import { loginUser } from '@services/graphql'
+import { loginUser } from '@services/graphql/auth'
+import { handleAuthStateSetup } from '@lib/auth'
+import { AuthContext } from '@contexts/AuthContext'
+import { setAuthorizationHeaders } from '@services/graphql'
 
 const INITIAL_STATE = {
   username: '',
   password: '',
+  error: false,
+  token: null,
 }
 
 const loginReducer = (state, action) => {
@@ -14,22 +19,40 @@ const loginReducer = (state, action) => {
       return { ...state, username: action.payload }
     case 'set/password':
       return { ...state, password: action.payload }
+    case 'login/error':
+      return { ...state, error: true }
+    case 'login/success':
+      return { ...state, token: action.payload, error: false }
   }
 }
 
 export default function Login() {
+  const { state: applicationState, dispatch: applicationDispatch } =
+    useContext(AuthContext)
   const [state, dispatch] = useReducer(loginReducer, INITIAL_STATE)
 
   const handleSubmit = async () => {
     const { username, password } = state
-
-    console.log(username, password)
-
     const [data, error] = await loginUser(username, password)
 
-    console.log(data)
-    console.log(error)
+    if (error) {
+      dispatchAction(dispatch, 'login/error')
+    }
+
+    const { token } = data.tokenAuth
+
+    dispatchAction(dispatch, 'login/success', token)
   }
+
+  useEffect(() => {
+    if (state.token) {
+      handleAuthStateSetup(
+        applicationDispatch,
+        state.token,
+        setAuthorizationHeaders,
+      )
+    }
+  }, [state.token])
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center">

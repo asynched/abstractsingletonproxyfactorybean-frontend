@@ -16,3 +16,24 @@
  * @property {string} name
  * @property {string} profileUrl
  */
+
+/**
+ * @callback AuthStateSetupCallback
+ *
+ * @property {string} token
+ * @returns {void}
+ */
+
+/**
+ * @typedef ActionType
+ *
+ * @property {string} type
+ * @property {any} payload
+ */
+
+/**
+ * @callback DispatcherCallback
+ *
+ * @param {ActionType} action
+ * @returns {any | void}
+ */
