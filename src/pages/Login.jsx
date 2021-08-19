@@ -1,6 +1,5 @@
 import { useReducer, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 
 import { dispatchAction } from '@lib/dispatch'
 import { handleFieldChange, preventDefault } from '@lib/ui-events'
@@ -8,7 +7,7 @@ import { handleAuthStateSetup } from '@lib/auth'
 import { loginUser } from '@services/graphql/auth'
 import { setAuthorizationHeaders } from '@services/graphql'
 import { AuthContext } from '@contexts/AuthContext'
-import LoginInputField from '@components/LoginInputField'
+import FormInputField from '@components/FormInputField'
 
 const INITIAL_STATE = {
   username: '',
@@ -59,16 +58,16 @@ export default function Login() {
   }, [state.token])
 
   return (
-    <div className="w-full h-screen grid grid-cols-2">
+    <div className="w-full h-screen grid md:grid-cols-2">
       <div className="w-full h-full flex flex-col items-center justify-center">
         <form
-          className="w-[90%] max-w-lg p-4 border rounded flex flex-col gap-4"
+          className="w-[90%] max-w-lg p-12 border rounded flex flex-col gap-4"
           onSubmit={preventDefault(handleSubmit)}
         >
           <h2 className="text-center text-4xl font-bold tracking-tighter">
             Login
           </h2>
-          <LoginInputField
+          <FormInputField
             label="Usuário"
             value={state.username}
             placeholder="Usuário"
@@ -76,10 +75,12 @@ export default function Login() {
               dispatchAction(dispatch, 'set/username', value)
             }
           />
-          <LoginInputField
+          <FormInputField
             label="Senha"
-            value={state.password}
             placeholder="Senha"
+            delay={300}
+            type="password"
+            value={state.password}
             changeHandler={value =>
               dispatchAction(dispatch, 'set/password', value)
             }
@@ -103,7 +104,7 @@ export default function Login() {
           </div>
         </form>
       </div>
-      <div className="w-full h-full flex items-center justify-center bg-gradient-to-r from-purple-500 to-indigo-500">
+      <div className="hidden w-full h-full md:flex items-center justify-center bg-gradient-to-r from-purple-500 to-indigo-500">
         <h1 className="mb-4 text-4xl font-bold tracking-tighter leading-relaxed text-white text-center">
           Abstract Singleton Proxy Factory Bean
         </h1>
