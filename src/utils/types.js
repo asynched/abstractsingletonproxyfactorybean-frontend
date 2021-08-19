@@ -18,7 +18,7 @@
  */
 
 /**
- * @callback AuthStateSetupCallback
+ * @callback AuthenticationStateSetupCallback
  *
  * @property {string} token
  * @returns {void}

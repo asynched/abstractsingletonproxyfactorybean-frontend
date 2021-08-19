@@ -5,7 +5,7 @@ import '@utils/types'
  *
  * @param {DispatcherCallback} applicationDispatcher
  * @param {string} token
- * @param {(token: string) => void} callback
+ * @param {AuthenticationStateSetupCallback} callback
  */
 export const handleAuthStateSetup = (
   applicationDispatcher,
