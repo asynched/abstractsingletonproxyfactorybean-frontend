@@ -32,8 +32,8 @@ export default function Register() {
   }
 
   return (
-    <div className="w-full h-screen grid grid-cols-2">
-      <div className="flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600">
+    <div className="w-full h-screen grid lg:grid-cols-2">
+      <div className="hidden lg:flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600">
         <h1 className="text-4xl text-white font-bold text-center tracking-tighter">
           Abstract Singleton Proxy Factory Bean
         </h1>

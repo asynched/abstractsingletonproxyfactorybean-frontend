@@ -3,23 +3,13 @@ schema {
   mutation: Mutation
 }
 
-type ClassType {
-  id: UUID!
-  name: String!
-  description: String!
-  teacher: TeacherType!
-  lessonSet: [LessonType!]!
-  resourceSet: [ResourceType!]!
-  noticeSet: [NoticeType!]!
-}
-
 scalar Date
 
 scalar GenericScalar
 
 type LessonType {
   id: UUID!
-  cls: ClassType!
+  subject: SubjectType!
   schedule: String!
   weekDay: LessonWeekday!
 }
@@ -36,13 +26,19 @@ type Mutation {
   tokenAuth(username: String!, password: String!): ObtainJSONWebToken
   verifyToken(token: String): Verify
   refreshToken(token: String): Refresh
+  register(
+    firstName: String!
+    lastName: String!
+    password: String!
+    username: String!
+  ): RegisterMutation
 }
 
 type NoticeType {
   id: UUID!
   title: String!
   text: String!
-  cls: ClassType!
+  subject: SubjectType!
 }
 
 type ObtainJSONWebToken {
@@ -52,18 +48,18 @@ type ObtainJSONWebToken {
 }
 
 type Query {
-  allTasks: [TaskType]
-  allTeachers: [TeacherType]
-  allClasses: [ClassType]
-  allLessons(token: String!): [LessonType]
   allNotices: [NoticeType]
-  allResources: [ResourceType]
-  task(uuid: UUID!): TaskType
-  teacher(uuid: UUID!): TeacherType
-  clazz(uuid: UUID!): ClassType
-  lesson(uuid: UUID!): LessonType
   notice(uuid: UUID!): NoticeType
+  allResources: [ResourceType]
   resource(uuid: UUID!): ResourceType
+  allSubjects: [SubjectType]
+  subject(uuid: UUID!): SubjectType
+  allTeachers: [TeacherType]
+  teacher(uuid: UUID!): TeacherType
+  allTasks: [TaskType]
+  task(uuid: UUID!): TaskType
+  allLessons: [LessonType]
+  lesson(uuid: UUID!): LessonType
   lessonByDay(day: String!): [LessonType]
 }
 
@@ -73,12 +69,28 @@ type Refresh {
   token: String!
 }
 
+type RegisterMutation {
+  username: String!
+  firstName: String!
+  lastName: String!
+}
+
 type ResourceType {
   id: UUID!
   name: String!
   description: String!
   url: String!
-  cls: ClassType!
+  subject: SubjectType!
+}
+
+type SubjectType {
+  id: UUID!
+  name: String!
+  description: String!
+  teacher: TeacherType!
+  lessonSet: [LessonType!]!
+  resourceSet: [ResourceType!]!
+  noticeSet: [NoticeType!]!
 }
 
 type TaskType {
@@ -97,7 +109,7 @@ type TeacherType {
   email: String!
   about: String!
   taskSet: [TaskType!]!
-  classSet: [ClassType!]!
+  subjectSet: [SubjectType!]!
 }
 
 scalar UUID

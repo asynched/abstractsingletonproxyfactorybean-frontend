@@ -58,7 +58,7 @@ export default function Login() {
   }, [state.token])
 
   return (
-    <div className="w-full h-screen grid md:grid-cols-2">
+    <div className="w-full h-screen grid lg:grid-cols-2">
       <div className="w-full h-full flex flex-col items-center justify-center">
         <form
           className="w-[90%] max-w-lg p-12 border rounded flex flex-col gap-4"
@@ -104,7 +104,7 @@ export default function Login() {
           </div>
         </form>
       </div>
-      <div className="hidden w-full h-full md:flex items-center justify-center bg-gradient-to-r from-purple-500 to-indigo-500">
+      <div className="hidden w-full h-full lg:flex items-center justify-center bg-gradient-to-r from-purple-500 to-indigo-500">
         <h1 className="mb-4 text-4xl font-bold tracking-tighter leading-relaxed text-white text-center">
           Abstract Singleton Proxy Factory Bean
         </h1>
