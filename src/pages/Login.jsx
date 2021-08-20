@@ -1,9 +1,11 @@
 import { useReducer, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 import { dispatchAction } from '@lib/dispatch'
-import { handleFieldChange, preventDefault } from '@lib/ui-events'
+import { preventDefault } from '@lib/ui-events'
 import { handleAuthStateSetup } from '@lib/auth'
+import { showErrorToast } from '@lib/toastEvents'
 import { loginUser } from '@services/graphql/auth'
 import { setAuthorizationHeaders } from '@services/graphql'
 import { AuthContext } from '@contexts/AuthContext'
@@ -30,8 +32,7 @@ const loginReducer = (state, action) => {
 }
 
 export default function Login() {
-  const { state: applicationState, dispatch: applicationDispatch } =
-    useContext(AuthContext)
+  const { dispatch: applicationDispatch } = useContext(AuthContext)
   const [state, dispatch] = useReducer(loginReducer, INITIAL_STATE)
 
   const handleSubmit = async () => {
@@ -56,6 +57,12 @@ export default function Login() {
       )
     }
   }, [state.token])
+
+  useEffect(() => {
+    if (state.error) {
+      showErrorToast('Credenciais inválidas, confira-as.')
+    }
+  }, [state.error])
 
   return (
     <div className="w-full h-screen grid lg:grid-cols-2">
@@ -86,7 +93,7 @@ export default function Login() {
             }
           />
           <button
-            className="py-2 px-4 text-white text-lg font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 rounded"
+            className="py-2 text-white bg-gradient-to-r from-purple-500 to-indigo-500 rounded"
             type="submit"
           >
             Login
@@ -105,9 +112,16 @@ export default function Login() {
         </form>
       </div>
       <div className="hidden w-full h-full lg:flex items-center justify-center bg-gradient-to-r from-purple-500 to-indigo-500">
-        <h1 className="mb-4 text-4xl font-bold tracking-tighter leading-relaxed text-white text-center">
-          Abstract Singleton Proxy Factory Bean
-        </h1>
+        <motion.h1
+          initial={{ opacity: 0, x: 128 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5 }}
+          className="text-4xl text-white font-bold text-center tracking-tighter"
+        >
+          Abstract Singleton Proxy
+          <br />
+          Factory Bean
+        </motion.h1>
       </div>
     </div>
   )

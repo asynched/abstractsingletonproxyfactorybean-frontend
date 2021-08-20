@@ -1,8 +1,12 @@
-import FormInputField from '@components/FormInputField'
+import { useReducer } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
 import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
-import { useReducer } from 'react'
-import { Link } from 'react-router-dom'
+import { showErrorToast, showSuccessToast } from '@lib/toastEvents'
+import { registerUser } from '@services/graphql/auth'
+import FormInputField from '@components/FormInputField'
 
 const INITIAL_STATE = {
   username: '',
@@ -25,18 +29,37 @@ const reducer = (state, action) => {
 }
 
 export default function Register() {
+  const history = useHistory()
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
 
-  const handleSubmit = () => {
-    console.log(state)
+  const handleSubmit = async () => {
+    const [, error] = await registerUser(state)
+
+    if (error) {
+      showErrorToast('Erro, confira os dados do formulário.')
+      return
+    }
+
+    showSuccessToast('Cadastrado(a) com sucesso, redirecionando.')
+
+    setTimeout(() => {
+      history.push('/')
+    }, 2_000)
   }
 
   return (
     <div className="w-full h-screen grid lg:grid-cols-2">
       <div className="hidden lg:flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600">
-        <h1 className="text-4xl text-white font-bold text-center tracking-tighter">
-          Abstract Singleton Proxy Factory Bean
-        </h1>
+        <motion.h1
+          initial={{ opacity: 0, x: -128 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5 }}
+          className="text-4xl text-white font-bold text-center tracking-tighter"
+        >
+          Abstract Singleton Proxy
+          <br />
+          Factory Bean
+        </motion.h1>
       </div>
       <div className="flex flex-col items-center justify-center">
         <form
