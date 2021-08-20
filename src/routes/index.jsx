@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
+import PrivateRoute from './PrivateRoute'
+import { checkUserPermission } from '@lib/auth'
+
 import Login from '@pages/Login'
 import Dashboard from '@pages/Dashboard'
 import Tasks from '@pages/Tasks'
@@ -11,8 +14,16 @@ export default function Routes() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/tasks/:id" component={Tasks} />
+        <PrivateRoute
+          path="/tasks/:id"
+          component={Tasks}
+          permissionHandler={checkUserPermission}
+        />
+        <PrivateRoute
+          path="/dashboard"
+          component={Dashboard}
+          permissionHandler={checkUserPermission}
+        />
       </Switch>
     </BrowserRouter>
   )

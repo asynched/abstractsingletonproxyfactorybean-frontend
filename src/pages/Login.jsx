@@ -1,15 +1,16 @@
 import { useReducer, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
 import { handleAuthStateSetup } from '@lib/auth'
-import { showErrorToast } from '@lib/toastEvents'
+import { showErrorToast } from '@lib/toast-events'
 import { loginUser } from '@services/graphql/auth'
 import { setAuthorizationHeaders } from '@services/graphql'
 import { AuthContext } from '@contexts/AuthContext'
 import FormInputField from '@components/FormInputField'
+import { saveTokenToLocalStorage } from '@lib/local-storage'
 
 const INITIAL_STATE = {
   username: '',
@@ -34,6 +35,7 @@ const loginReducer = (state, action) => {
 export default function Login() {
   const { dispatch: applicationDispatch } = useContext(AuthContext)
   const [state, dispatch] = useReducer(loginReducer, INITIAL_STATE)
+  const history = useHistory()
 
   const handleSubmit = async () => {
     const { username, password } = state
@@ -48,12 +50,16 @@ export default function Login() {
     dispatchAction(dispatch, 'login/success', token)
   }
 
+  const redirectToDashboard = () => history.push('/dashboard')
+
   useEffect(() => {
     if (state.token) {
       handleAuthStateSetup(
         applicationDispatch,
         state.token,
         setAuthorizationHeaders,
+        saveTokenToLocalStorage,
+        redirectToDashboard,
       )
     }
   }, [state.token])

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
-import { showErrorToast, showSuccessToast } from '@lib/toastEvents'
+import { showErrorToast, showSuccessToast } from '@lib/toast-events'
 import { registerUser } from '@services/graphql/auth'
 import FormInputField from '@components/FormInputField'
 
