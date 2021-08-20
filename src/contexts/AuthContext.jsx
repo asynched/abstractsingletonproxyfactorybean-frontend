@@ -4,18 +4,16 @@ export const AuthContext = createContext(null)
 
 const INITIAL_STATE = {
   user: {
-    name: 'Eder',
-    class: 'CC4Q44',
+    firstName: null,
+    lastName: null,
+    username: null,
   },
-  token: 'R4ND0M_4sS_Tok3N',
 }
 
 const authContextReducer = (state, action) => {
   switch (action.type) {
     case 'set/user':
       return { ...state, user: action.payload }
-    case 'set/token':
-      return { ...state, token: action.payload }
     default:
       throw new Error(`Action type "${action.type}" is not defined`)
   }

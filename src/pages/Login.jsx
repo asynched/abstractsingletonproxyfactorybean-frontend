@@ -4,13 +4,11 @@ import { motion } from 'framer-motion'
 
 import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
-import { handleAuthStateSetup } from '@lib/auth'
 import { showErrorToast } from '@lib/toast-events'
 import { loginUser } from '@services/graphql/auth'
-import { setAuthorizationHeaders } from '@services/graphql'
 import { AuthContext } from '@contexts/AuthContext'
 import FormInputField from '@components/FormInputField'
-import { saveTokenToLocalStorage } from '@lib/local-storage'
+import { authStateChanged } from '@events/auth'
 
 const INITIAL_STATE = {
   username: '',
@@ -28,7 +26,9 @@ const loginReducer = (state, action) => {
     case 'login/error':
       return { ...state, error: true }
     case 'login/success':
-      return { ...state, token: action.payload, error: false }
+      return { ...state, error: false, token: action.payload }
+    default:
+      throw new Error(`Action type "${action.type}" is not defined.`)
   }
 }
 
@@ -45,8 +45,7 @@ export default function Login() {
       dispatchAction(dispatch, 'login/error')
     }
 
-    const { token } = data.tokenAuth
-
+    const token = data.tokenAuth.token
     dispatchAction(dispatch, 'login/success', token)
   }
 
@@ -54,13 +53,7 @@ export default function Login() {
 
   useEffect(() => {
     if (state.token) {
-      handleAuthStateSetup(
-        applicationDispatch,
-        state.token,
-        setAuthorizationHeaders,
-        saveTokenToLocalStorage,
-        redirectToDashboard,
-      )
+      authStateChanged(applicationDispatch, state.token, redirectToDashboard)
     }
   }, [state.token])
 

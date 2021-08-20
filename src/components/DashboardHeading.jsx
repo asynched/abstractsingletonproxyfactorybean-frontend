@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react'
-import { getRandomArrayElement } from '@helpers/arrays'
+import { useContext, useEffect, useState } from 'react'
 import { getCurrentLocaleTimeString } from '@helpers/dates'
-
-const WELCOME_MESSAGES = ['Hello', 'Hallo', 'Olá', 'Bonjour', 'Привет']
+import { randomGreetingMessages, randomNames } from '@helpers/fake-data'
+import { getUserData } from '@services/graphql/queries'
+import { showErrorToast } from '@lib/toast-events'
+import { AuthContext } from '@contexts/AuthContext'
 
 /**
  *
- * @param {DashboardHeadingProps} props
  * @returns A heading element for the dashboard page
  */
-export default function DashboardHeading({ name }) {
-  const [greetingMessage] = useState(getRandomArrayElement(WELCOME_MESSAGES))
+export default function DashboardHeading() {
+  const { state: appState } = useContext(AuthContext)
+  const { user } = appState
+  const [greetingMessage] = useState(randomGreetingMessages.randomMessage)
   const [currentTime, setCurrentTime] = useState(getCurrentLocaleTimeString())
 
   useEffect(() => {
@@ -24,15 +26,10 @@ export default function DashboardHeading({ name }) {
   return (
     <div className="mb-8">
       <h1 className="text-4xl tracking-tighter">
-        {greetingMessage}, <span className="font-bold">{name}!</span> 👋
+        {greetingMessage}, <span className="font-bold">{user.firstName}!</span>{' '}
+        👋
       </h1>
       <p>{currentTime}</p>
     </div>
   )
 }
-
-/**
- * @typedef DashboardHeadingProps
- *
- * @property {string} name User's name
- */
