@@ -33,6 +33,7 @@ export default function Dashboard() {
     'allNotices',
   )
 
+  useToastError(userError, 'Error ao buscar os dados do perfil')
   useToastError(lessonsError, 'Error ao buscar os dados de aulas')
   useToastError(tasksError, 'Error ao buscar os dados de tarefas')
   useToastError(noticesError, 'Error ao buscar os dados de avisos')

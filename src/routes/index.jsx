@@ -1,13 +1,15 @@
 import { BrowserRouter, Switch } from 'react-router-dom'
 
+import PrivateRoute from './PrivateRoute'
+import PublicRoute from './PublicRoute'
+
 import { checkUserPermission } from '@lib/auth'
 
 import Login from '@pages/Login'
 import Dashboard from '@pages/Dashboard'
 import Tasks from '@pages/Tasks'
 import Register from '@pages/Register'
-import PrivateRoute from './PrivateRoute'
-import PublicRoute from './PublicRoute'
+import Schedule from '@pages/Schedule'
 
 export default function Routes() {
   return (
@@ -23,6 +25,11 @@ export default function Routes() {
         <PrivateRoute
           path="/dashboard"
           component={Dashboard}
+          permissionHandler={checkUserPermission}
+        />
+        <PrivateRoute
+          path="/schedule"
+          component={Schedule}
           permissionHandler={checkUserPermission}
         />
       </Switch>

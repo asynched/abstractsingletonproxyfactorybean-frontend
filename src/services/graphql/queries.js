@@ -57,3 +57,17 @@ export const GET_NOTICES_QUERY = gql`
     }
   }
 `
+
+export const GET_ALL_LESSONS_QUERY = gql`
+  query AllLessons {
+    allLessons {
+      id
+      schedule
+      weekDay
+      url
+      subject {
+        name
+      }
+    }
+  }
+`
