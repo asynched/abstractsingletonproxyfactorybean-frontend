@@ -71,3 +71,22 @@ export const GET_ALL_LESSONS_QUERY = gql`
     }
   }
 `
+
+export const GET_TASK_QUERY = gql`
+  query GetTask($uuid: UUID!) {
+    task(uuid: $uuid) {
+      id
+      title
+      description
+      attachments
+      dueDate
+      teacher {
+        id
+        name
+        imageUrl
+        email
+        about
+      }
+    }
+  }
+`

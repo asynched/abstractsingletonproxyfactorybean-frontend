@@ -12,6 +12,7 @@ export default function DashboardSidebarItem({
   className,
   special,
   url,
+  callback,
 }) {
   return (
     <Link
@@ -21,6 +22,7 @@ export default function DashboardSidebarItem({
       } group w-16 h-16 relative flex items-center justify-center text-white ${
         special ? `bg-gradient-to-r from-purple-500 to-indigo-500` : ''
       }`}
+      onClick={() => callback && callback()}
     >
       {icon}
       <DashboardSidebarItemTooltip text={tooltip} />

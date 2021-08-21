@@ -7,6 +7,7 @@ import {
   LogoutIcon,
 } from '@heroicons/react/outline'
 import { ViewGridIcon } from '@heroicons/react/solid'
+import { clearTokenFromLocalStorage } from '@lib/local-storage'
 
 /**
  * @returns A sidebar element for the pages that follow the dashboard layout
@@ -55,6 +56,7 @@ export default function DashboardSidebar() {
         icon={<LogoutIcon className="w-8 h-8" />}
         tooltip={'Sair'}
         special={false}
+        callback={clearTokenFromLocalStorage}
         url="/"
       />
     </nav>

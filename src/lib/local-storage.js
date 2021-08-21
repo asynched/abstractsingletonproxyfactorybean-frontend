@@ -11,3 +11,6 @@ export const saveTokenToLocalStorage = token =>
  */
 export const getTokenFromLocalStorage = () =>
   localStorage.getItem('_token') || null
+
+export const clearTokenFromLocalStorage = () =>
+  localStorage.removeItem('_token')

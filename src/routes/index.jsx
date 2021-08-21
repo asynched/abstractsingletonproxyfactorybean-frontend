@@ -10,6 +10,7 @@ import Dashboard from '@pages/Dashboard'
 import Tasks from '@pages/Tasks'
 import Register from '@pages/Register'
 import Schedule from '@pages/Schedule'
+import NotFound from '@pages/NotFound'
 
 export default function Routes() {
   return (
@@ -30,6 +31,10 @@ export default function Routes() {
         <PrivateRoute
           path="/schedule"
           component={Schedule}
+          permissionHandler={checkUserPermission}
+        />
+        <PrivateRoute
+          component={NotFound}
           permissionHandler={checkUserPermission}
         />
       </Switch>
