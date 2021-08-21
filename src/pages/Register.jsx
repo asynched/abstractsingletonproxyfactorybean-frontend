@@ -48,8 +48,8 @@ export default function Register() {
   }
 
   return (
-    <div className="w-full h-screen grid lg:grid-cols-2">
-      <div className="hidden lg:flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600">
+    <div className="w-full h-screen grid text-gray-800 lg:grid-cols-5">
+      <div className="col-span-3 hidden lg:flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600">
         <motion.h1
           initial={{ opacity: 0, x: -128 }}
           animate={{ opacity: 1, x: 0 }}
@@ -61,14 +61,17 @@ export default function Register() {
           Factory Bean
         </motion.h1>
       </div>
-      <div className="flex flex-col items-center justify-center">
+      <div className="col-span-2 flex flex-col items-center justify-center">
         <form
-          className="p-12 w-[90%] max-w-lg border rounded"
+          className="w-[90%] max-w-lg"
           onSubmit={preventDefault(handleSubmit)}
         >
-          <h1 className="text-3xl font-bold tracking-tighter text-center mb-4 ">
+          <h1 className="mb-2 text-4xl font-bold tracking-tighter text-center">
             Registrar-se
           </h1>
+          <p className="mb-4 text-gray-500 text-center">
+            Cadastre-se para acessar os conteúdos
+          </p>
           <FormInputField
             label="Nome de usuário"
             placeholder="Nome de usuário"
@@ -113,7 +116,7 @@ export default function Register() {
           >
             Registrar
           </button>
-          <p className="mt-6 text-center">
+          <p className="mt-6 text-center text-gray-500">
             Já possui uma conta?{' '}
             <Link className="text-purple-600 hover:underline" to="/">
               Faça login

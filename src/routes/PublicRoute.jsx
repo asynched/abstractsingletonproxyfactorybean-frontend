@@ -1,8 +1,7 @@
-import { AuthContext } from '@contexts/AuthContext'
 import { getTokenFromLocalStorage } from '@lib/local-storage'
 import { authStateChanged } from '@events/auth'
-import { useContext, useEffect, useState } from 'react'
-import { Redirect, Route, useHistory } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Route, useHistory } from 'react-router-dom'
 
 /**
  *
@@ -10,15 +9,12 @@ import { Redirect, Route, useHistory } from 'react-router-dom'
  * @returns
  */
 export default function PublicRoute({ component, path, exact = false }) {
-  const { dispatch: applicationDispatch } = useContext(AuthContext)
   const [token] = useState(getTokenFromLocalStorage())
   const history = useHistory()
 
   useEffect(() => {
     if (token) {
-      authStateChanged(applicationDispatch, token, () =>
-        history.push('/dashboard'),
-      )
+      authStateChanged(token, () => history.push('/dashboard'))
     }
   }, [])
 

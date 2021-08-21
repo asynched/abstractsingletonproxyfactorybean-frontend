@@ -37,8 +37,8 @@ export default function FormInputField({
       <input
         id={label}
         type={type}
-        className="py-2 px-4 border rounded outline-none transition focus:border-transparent focus:ring-2 focus:ring-purple-600"
         placeholder={placeholder}
+        className="border-gray-300 rounded transition focus:ring-purple-600"
         value={value}
         onChange={e => changeHandler(e.target.value)}
       />

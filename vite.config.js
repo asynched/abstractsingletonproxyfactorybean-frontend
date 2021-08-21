@@ -19,6 +19,7 @@ export default defineConfig({
       '@routes': path.resolve(__dirname, 'src', 'routes'),
       '@layouts': path.resolve(__dirname, 'src', 'layouts'),
       '@events': path.resolve(__dirname, 'src', 'events'),
+      '@hooks': path.resolve(__dirname, 'src', 'hooks'),
     },
   },
   esbuild: {

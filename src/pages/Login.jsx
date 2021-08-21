@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useContext } from 'react'
+import { useReducer, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
@@ -6,7 +6,6 @@ import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
 import { showErrorToast } from '@lib/toast-events'
 import { loginUser } from '@services/graphql/auth'
-import { AuthContext } from '@contexts/AuthContext'
 import FormInputField from '@components/FormInputField'
 import { authStateChanged } from '@events/auth'
 
@@ -33,7 +32,6 @@ const loginReducer = (state, action) => {
 }
 
 export default function Login() {
-  const { dispatch: applicationDispatch } = useContext(AuthContext)
   const [state, dispatch] = useReducer(loginReducer, INITIAL_STATE)
   const history = useHistory()
 
@@ -53,7 +51,7 @@ export default function Login() {
 
   useEffect(() => {
     if (state.token) {
-      authStateChanged(applicationDispatch, state.token, redirectToDashboard)
+      authStateChanged(state.token, redirectToDashboard)
     }
   }, [state.token])
 
@@ -64,15 +62,18 @@ export default function Login() {
   }, [state.error])
 
   return (
-    <div className="w-full h-screen grid lg:grid-cols-2">
-      <div className="w-full h-full flex flex-col items-center justify-center">
+    <div className="w-full h-screen grid lg:grid-cols-5 text-gray-800">
+      <div className="col-span-2 w-full h-full flex flex-col items-center justify-center">
         <form
-          className="w-[90%] max-w-lg p-12 border rounded flex flex-col gap-4"
+          className="w-[90%] max-w-md flex flex-col gap-4"
           onSubmit={preventDefault(handleSubmit)}
         >
           <h2 className="text-center text-4xl font-bold tracking-tighter">
-            Login
+            Bem vindo!
           </h2>
+          <p className="mb-4 text-gray-400 text-center">
+            Faça login para acessar o conteúdo
+          </p>
           <FormInputField
             label="Usuário"
             value={state.username}
@@ -99,7 +100,11 @@ export default function Login() {
           </button>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <input type="checkbox" id="remember-me" />
+              <input
+                type="checkbox"
+                className="border-gray-300 text-purple-600 rounded transition focus:ring-purple-600"
+                id="remember-me"
+              />
               <label className="ml-2" htmlFor="remember-me">
                 Lembrar de mim
               </label>
@@ -110,7 +115,7 @@ export default function Login() {
           </div>
         </form>
       </div>
-      <div className="hidden w-full h-full lg:flex items-center justify-center bg-gradient-to-r from-purple-500 to-indigo-500">
+      <div className="col-span-3 hidden w-full h-full lg:flex items-center justify-center bg-gradient-to-r from-purple-500 to-indigo-500">
         <motion.h1
           initial={{ opacity: 0, x: 128 }}
           animate={{ opacity: 1, x: 0 }}

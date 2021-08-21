@@ -13,7 +13,8 @@
       "@utils/*": ["utils/*"],
       "@routes/*": ["routes/*"],
       "@layouts/*": ["layouts/*"],
-      "@events/*": ["events/*"]
+      "@events/*": ["events/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["./src"]

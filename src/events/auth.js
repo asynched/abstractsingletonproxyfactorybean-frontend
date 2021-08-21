@@ -1,9 +1,7 @@
-import { dispatchAction } from '@lib/dispatch'
 import { saveTokenToLocalStorage } from '@lib/local-storage'
 import { setAuthorizationHeaders } from '@services/graphql'
 
-export const authStateChanged = (dispatcher, token, callback) => {
-  dispatchAction(dispatcher, 'set/token', token)
+export const authStateChanged = (token, callback) => {
   setAuthorizationHeaders(token)
   saveTokenToLocalStorage(token)
 

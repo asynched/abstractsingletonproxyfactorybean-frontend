@@ -62,3 +62,23 @@ export const getTasksData = async () => {
 
   return data.allTasks
 }
+
+export const getNoticesData = async () => {
+  const query = gql`
+    query {
+      allNotices {
+        id
+        title
+        text
+        teacher {
+          name
+          imageUrl
+        }
+      }
+    }
+  `
+
+  const data = await client.request(query)
+
+  return data.allNotices
+}

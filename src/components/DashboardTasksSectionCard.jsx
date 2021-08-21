@@ -1,15 +1,30 @@
 import '@utils/types'
+import { motion } from 'framer-motion'
 
 /**
  *
  * @param {DashboardTasksSectionCardType} props
  * @returns
  */
-export default function DashboardTasksSectionCard({ task }) {
+export default function DashboardTasksSectionCard({ task, delay }) {
   const parseDate = date => date.split('-').reverse().join('/')
 
+  const animation = {
+    initial: {
+      opacity: 0,
+      y: 64,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+    },
+  }
+
   return (
-    <div
+    <motion.div
+      initial={animation.initial}
+      animate={animation.animate}
+      transition={{ delay: delay / 1000, type: 'tween' }}
       className="py-2 px-4 flex flex-col gap-2 border rounded-lg transition duration-300 transform hover:-translate-y-1 hover:shadow-lg"
       key={task.id}
     >
@@ -45,7 +60,7 @@ export default function DashboardTasksSectionCard({ task }) {
       >
         Anexos
       </a>
-    </div>
+    </motion.div>
   )
 }
 
