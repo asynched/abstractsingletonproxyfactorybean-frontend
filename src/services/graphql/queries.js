@@ -1,54 +1,23 @@
-import { gql } from 'graphql-request'
-import client from '.'
+import { gql } from '@apollo/client'
 
-export const getUserData = async () => {
-  const query = gql`
-    query GetSelf {
-      getSelf {
-        username
-        firstName
-        lastName
-      }
+export const GET_USER_DATA_QUERY = gql`
+  query GetSelf {
+    getSelf {
+      username
+      firstName
+      lastName
     }
-  `
+  }
+`
 
-  const data = await client.request(query)
-
-  return data
-}
-
-export const getLessonsData = async () => {
-  const query = gql`
-    query {
-      lessonByDay(day: "QUA") {
-        id
-        url
-        schedule
-        subject {
-          name
-          teacher {
-            id
-            name
-            imageUrl
-          }
-        }
-      }
-    }
-  `
-
-  const data = await client.request(query)
-
-  return data.lessonByDay
-}
-
-export const getTasksData = async () => {
-  const query = gql`
-    query {
-      allTasks {
-        id
-        title
-        attachments
-        dueDate
+export const GET_LESSONS_DATA_QUERY = gql`
+  query {
+    lessonByDay(day: "QUA") {
+      id
+      url
+      schedule
+      subject {
+        name
         teacher {
           id
           name
@@ -56,29 +25,35 @@ export const getTasksData = async () => {
         }
       }
     }
-  `
+  }
+`
 
-  const data = await client.request(query)
-
-  return data.allTasks
-}
-
-export const getNoticesData = async () => {
-  const query = gql`
-    query {
-      allNotices {
+export const GET_TASKS_QUERY = gql`
+  query {
+    allTasks {
+      id
+      title
+      attachments
+      dueDate
+      teacher {
         id
-        title
-        text
-        teacher {
-          name
-          imageUrl
-        }
+        name
+        imageUrl
       }
     }
-  `
+  }
+`
 
-  const data = await client.request(query)
-
-  return data.allNotices
-}
+export const GET_NOTICES_QUERY = gql`
+  query {
+    allNotices {
+      id
+      title
+      text
+      teacher {
+        name
+        imageUrl
+      }
+    }
+  }
+`

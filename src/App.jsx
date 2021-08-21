@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { injectStyle } from 'react-toastify/dist/inject-style'
-import { SWRConfig } from 'swr'
+import { ApolloProvider } from '@apollo/client'
+
 import AuthContextProvider from '@contexts/AuthContext'
+import client from '@services/graphql'
+
 import Routes from '@routes/index'
 
 export default function App() {
@@ -10,14 +13,10 @@ export default function App() {
 
   return (
     <AuthContextProvider>
-      <SWRConfig
-        value={{
-          revalidateOnFocus: false,
-        }}
-      >
+      <ApolloProvider client={client}>
         <Routes />
         <ToastContainer pauseOnHover={false} position="bottom-right" />
-      </SWRConfig>
+      </ApolloProvider>
     </AuthContextProvider>
   )
 }

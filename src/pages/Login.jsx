@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 import useToastError from '@hooks/useToastError'
-import { loginUser } from '@services/graphql/auth'
 import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
 import { authStateChanged } from '@events/auth'
@@ -16,6 +15,8 @@ const INITIAL_STATE = {
   error: false,
   token: null,
 }
+
+const loginUser = () => void 0
 
 const loginReducer = (state, action) => {
   switch (action.type) {

@@ -1,15 +1,16 @@
 import { useContext, useEffect } from 'react'
-import useSWR from 'swr'
 
-import useToastError from '@hooks/useToastError'
-import { AuthContext } from '@contexts/AuthContext'
 import {
-  getLessonsData,
-  getNoticesData,
-  getTasksData,
-  getUserData,
+  GET_LESSONS_DATA_QUERY,
+  GET_NOTICES_QUERY,
+  GET_TASKS_QUERY,
+  GET_USER_DATA_QUERY,
 } from '@services/graphql/queries'
 import { dispatchAction } from '@lib/dispatch'
+
+import useGraphQuery from '@hooks/useGraphQuery'
+import useToastError from '@hooks/useToastError'
+import { AuthContext } from '@contexts/AuthContext'
 
 import MainLayout from '@layouts/MainLayout'
 import DashboardHeading from '@components/DashboardHeading'
@@ -21,21 +22,15 @@ import DashboardNoticeSection from '@components/DashboardNoticeSection'
 export default function Dashboard() {
   const { dispatch } = useContext(AuthContext)
 
-  useSWR('user', async () => {
-    const data = await getUserData()
-    dispatchAction(dispatch, 'set/user', data.getSelf)
-  })
-
-  const { data: lessonsData, error: lessonsError } = useSWR(
-    'lessons',
-    getLessonsData,
+  const [userData, userError] = useGraphQuery(GET_USER_DATA_QUERY, 'getSelf')
+  const [lessonsData, lessonsError] = useGraphQuery(
+    GET_LESSONS_DATA_QUERY,
+    'lessonByDay',
   )
-
-  const { data: tasksData, error: tasksError } = useSWR('tasks', getTasksData)
-
-  const { data: noticesData, error: noticesError } = useSWR(
-    'notices',
-    getNoticesData,
+  const [tasksData, tasksError] = useGraphQuery(GET_TASKS_QUERY, 'allTasks')
+  const [noticesData, noticesError] = useGraphQuery(
+    GET_NOTICES_QUERY,
+    'allNotices',
   )
 
   useToastError(lessonsError, 'Error ao buscar os dados de aulas')
@@ -43,8 +38,10 @@ export default function Dashboard() {
   useToastError(noticesError, 'Error ao buscar os dados de avisos')
 
   useEffect(() => {
-    console.log(noticesData)
-  }, [noticesData])
+    if (userData) {
+      dispatchAction(dispatch, 'set/user', userData)
+    }
+  }, [userData])
 
   return (
     <MainLayout>

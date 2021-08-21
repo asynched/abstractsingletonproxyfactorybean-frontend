@@ -1,26 +1,30 @@
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import { getTokenFromLocalStorage } from '@lib/local-storage'
-import { GraphQLClient } from 'graphql-request'
 
-const makeAuthHeaders = () => {
-  const token = getTokenFromLocalStorage()
-
-  if (!token) {
-    return {}
-  }
+const makeAuthorizationHeaders = token => {
+  if (!token) return {}
 
   return {
     Authorization: `JWT ${token}`,
   }
 }
 
-const client = new GraphQLClient('http://localhost:8000/graphql/', {
-  headers: {
-    ...makeAuthHeaders(),
-  },
+const httpLink = createHttpLink({
+  uri: 'http://localhost:8000/graphql/',
 })
 
-export const setAuthorizationHeaders = token => {
-  client.setHeader('Authorization', `JWT ${token}`)
-}
+const authLink = setContext(() => {
+  const token = getTokenFromLocalStorage()
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: makeAuthorizationHeaders(token),
+  }
+})
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+})
 
 export default client

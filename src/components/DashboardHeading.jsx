@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { getCurrentLocaleTimeString } from '@helpers/dates'
 import { randomGreetingMessages, randomNames } from '@helpers/fake-data'
-import { getUserData } from '@services/graphql/queries'
-import { showErrorToast } from '@lib/toast-events'
 import { AuthContext } from '@contexts/AuthContext'
 
 /**

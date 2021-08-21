@@ -19,7 +19,7 @@ export default function DashboardNoticeSection({ notices = [] }) {
       <h1 className="mb-4 text-4xl tracking-tighter font-bold">Avisos</h1>
       <div>
         {notices.map(notice => (
-          <DashboardNoticeSectionCard notice={notice} />
+          <DashboardNoticeSectionCard key={notice.id} notice={notice} />
         ))}
       </div>
     </div>
