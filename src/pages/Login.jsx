@@ -8,6 +8,8 @@ import { preventDefault } from '@lib/ui-events'
 import { authStateChanged } from '@events/auth'
 
 import FormInputField from '@components/FormInputField'
+import { useMutation } from '@apollo/client'
+import { LOGIN_MUTATION } from '@services/graphql/mutations'
 
 const INITIAL_STATE = {
   username: '',
@@ -15,8 +17,6 @@ const INITIAL_STATE = {
   error: false,
   token: null,
 }
-
-const loginUser = () => void 0
 
 const loginReducer = (state, action) => {
   switch (action.type) {
@@ -35,29 +35,23 @@ const loginReducer = (state, action) => {
 
 export default function Login() {
   const [state, dispatch] = useReducer(loginReducer, INITIAL_STATE)
+  const [loginUser, { error, data }] = useMutation(LOGIN_MUTATION)
   const history = useHistory()
 
-  const handleSubmit = async () => {
-    const { username, password } = state
-    const [data, error] = await loginUser(username, password)
-
-    if (error) {
-      dispatchAction(dispatch, 'login/error')
-    }
-
-    const token = data.tokenAuth.token
-    dispatchAction(dispatch, 'login/success', token)
+  const handleSubmit = () => {
+    loginUser({ variables: state })
   }
 
   const redirectToDashboard = () => history.push('/dashboard')
 
   useEffect(() => {
-    if (state.token) {
-      authStateChanged(state.token, redirectToDashboard)
+    const token = data?.tokenAuth?.token
+    if (token) {
+      authStateChanged(token, redirectToDashboard)
     }
-  }, [state.token])
+  }, [data?.tokenAuth?.token])
 
-  useToastError(state.error, 'Credenciais inválidas, confira-as.')
+  useToastError(error, 'Credenciais inválidas, confira-as.')
 
   return (
     <div className="w-full h-screen grid lg:grid-cols-5 text-gray-800">
@@ -76,6 +70,7 @@ export default function Login() {
             label="Usuário"
             value={state.username}
             placeholder="Usuário"
+            required
             changeHandler={value =>
               dispatchAction(dispatch, 'set/username', value)
             }
@@ -85,6 +80,7 @@ export default function Login() {
             placeholder="Senha"
             delay={300}
             type="password"
+            required
             value={state.password}
             changeHandler={value =>
               dispatchAction(dispatch, 'set/password', value)

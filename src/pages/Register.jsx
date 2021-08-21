@@ -6,8 +6,10 @@ import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
 import { showErrorToast, showSuccessToast } from '@lib/toast-events'
 import FormInputField from '@components/FormInputField'
-
-const registerUser = _ => void 0
+import { useMutation } from '@apollo/client'
+import { REGISTER_MUTATION } from '@services/graphql/mutations'
+import useToastError from '@hooks/useToastError'
+import { useToastSuccess } from '@hooks/useToastSuccess'
 
 const INITIAL_STATE = {
   username: '',
@@ -32,21 +34,19 @@ const reducer = (state, action) => {
 export default function Register() {
   const history = useHistory()
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
+  const [registerUser, { error, data }] = useMutation(REGISTER_MUTATION)
 
   const handleSubmit = async () => {
-    const [, error] = await registerUser(state)
-
-    if (error) {
-      showErrorToast('Erro, confira os dados do formulário.')
-      return
-    }
-
-    showSuccessToast('Cadastrado(a) com sucesso, redirecionando.')
-
-    setTimeout(() => {
-      history.push('/')
-    }, 2_000)
+    registerUser({ variables: state })
   }
+
+  useToastError(error, 'Erro ao tentar se cadastrar, verifique as credenciais')
+
+  useToastSuccess(data, 'Cadastrado com sucesso, redirecionando.', () => {
+    setTimeout(() => {
+      history.push('/dashboard')
+    }, 2_000)
+  })
 
   return (
     <div className="w-full h-screen grid text-gray-800 lg:grid-cols-5">
@@ -77,6 +77,9 @@ export default function Register() {
             label="Nome de usuário"
             placeholder="Nome de usuário"
             value={state.username}
+            pattern="^[a-zA-Z0-9]{5,}$"
+            title="Nome de usuário contendo apenas letras e números"
+            required
             changeHandler={value =>
               dispatchAction(dispatch, 'set/username', value)
             }
@@ -86,6 +89,9 @@ export default function Register() {
               label="Nome"
               placeholder="Nome"
               delay={300}
+              pattern="^[^\s]{3,16}$"
+              title="Primeiro nome sem espaços"
+              required
               value={state.firstName}
               changeHandler={value =>
                 dispatchAction(dispatch, 'set/firstName', value)
@@ -96,6 +102,9 @@ export default function Register() {
               placeholder="Sobrenome"
               delay={450}
               value={state.lastName}
+              pattern="^[^\s]{3,16}$"
+              title="Sobrenome nome sem espaços"
+              required
               changeHandler={value =>
                 dispatchAction(dispatch, 'set/lastName', value)
               }
@@ -107,6 +116,9 @@ export default function Register() {
             type="password"
             delay={600}
             value={state.password}
+            pattern="(.){8,}"
+            title="Senha com no mínimo 8 caracteres"
+            required
             changeHandler={value =>
               dispatchAction(dispatch, 'set/password', value)
             }

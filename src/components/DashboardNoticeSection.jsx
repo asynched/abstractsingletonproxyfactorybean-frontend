@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import DashboardNoticeSectionCard from './DashboardNoticeSectionCard'
 
 export default function DashboardNoticeSection({ notices = [] }) {

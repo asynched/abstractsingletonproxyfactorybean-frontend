@@ -10,6 +10,9 @@ export default function FormInputField({
   value,
   placeholder,
   changeHandler,
+  pattern,
+  title,
+  required = false,
   delay = 150,
   type = 'text',
 }) {
@@ -40,6 +43,9 @@ export default function FormInputField({
         placeholder={placeholder}
         className="border-gray-300 rounded transition focus:ring-purple-600"
         value={value}
+        pattern={pattern}
+        title={title}
+        required={required}
         onChange={e => changeHandler(e.target.value)}
       />
     </motion.div>
@@ -49,10 +55,13 @@ export default function FormInputField({
 /**
  * @typedef FormInputFieldProps
  *
- * @property {string} label
- * @property {string | number} value
+ * @property {string}label
+ * @property {string} value
  * @property {string} placeholder
  * @property {(value: string) => void} changeHandler
- * @property {number} delay
- * @property {string} type
+ * @property {string} pattern
+ * @property {string} title
+ * @property {boolean?} required
+ * @property {number?} delay
+ * @property {string?} type
  */
