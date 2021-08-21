@@ -8,6 +8,7 @@ import { showErrorToast } from '@lib/toast-events'
 import { loginUser } from '@services/graphql/auth'
 import FormInputField from '@components/FormInputField'
 import { authStateChanged } from '@events/auth'
+import useToastError from '@hooks/useToastError'
 
 const INITIAL_STATE = {
   username: '',
@@ -55,11 +56,7 @@ export default function Login() {
     }
   }, [state.token])
 
-  useEffect(() => {
-    if (state.error) {
-      showErrorToast('Credenciais inválidas, confira-as.')
-    }
-  }, [state.error])
+  useToastError(state.error, 'Credenciais inválidas, confira-as.')
 
   return (
     <div className="w-full h-screen grid lg:grid-cols-5 text-gray-800">

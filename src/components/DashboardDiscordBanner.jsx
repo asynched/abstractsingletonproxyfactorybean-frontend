@@ -1,6 +1,6 @@
 export default function DashboardDiscordBanner() {
   return (
-    <div className="p-8 text-white bg-gradient-to-r from-gray-700 to-gray-900 rounded shadow-xl">
+    <div className="p-8 text-white bg-gradient-to-r from-gray-700 to-gray-900 rounded-lg shadow-xl">
       <h1 className="mb-2 text-4xl font-bold tracking-tighter">
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
           Também estamos no Discord!

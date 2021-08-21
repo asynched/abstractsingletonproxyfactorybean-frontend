@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import useSWR from 'swr'
 
-import useFailedRequestState from '@hooks/useFailedRequestState'
+import useToastError from '@hooks/useToastError'
 import { AuthContext } from '@contexts/AuthContext'
 import {
   getLessonsData,
@@ -38,9 +38,9 @@ export default function Dashboard() {
     getNoticesData,
   )
 
-  useFailedRequestState(lessonsError, 'Error ao buscar os dados de aulas')
-  useFailedRequestState(tasksError, 'Error ao buscar os dados de tarefas')
-  useFailedRequestState(noticesError, 'Error ao buscar os dados de avisos')
+  useToastError(lessonsError, 'Error ao buscar os dados de aulas')
+  useToastError(tasksError, 'Error ao buscar os dados de tarefas')
+  useToastError(noticesError, 'Error ao buscar os dados de avisos')
 
   useEffect(() => {
     console.log(noticesData)
@@ -54,7 +54,7 @@ export default function Dashboard() {
         <section className="md:col-span-4">
           <DashboardLessonsSection lessons={lessonsData || []} />
           {/* Avisos */}
-          <DashboardNoticeSection />
+          <DashboardNoticeSection notices={noticesData || []} />
           {/* Discord */}
           <DashboardDiscordBanner />
           {/* Add another section, maybe? */}
