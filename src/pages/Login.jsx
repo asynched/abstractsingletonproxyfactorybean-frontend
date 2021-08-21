@@ -2,13 +2,13 @@ import { useReducer, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
+import useToastError from '@hooks/useToastError'
+import { loginUser } from '@services/graphql/auth'
 import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
-import { showErrorToast } from '@lib/toast-events'
-import { loginUser } from '@services/graphql/auth'
-import FormInputField from '@components/FormInputField'
 import { authStateChanged } from '@events/auth'
-import useToastError from '@hooks/useToastError'
+
+import FormInputField from '@components/FormInputField'
 
 const INITIAL_STATE = {
   username: '',

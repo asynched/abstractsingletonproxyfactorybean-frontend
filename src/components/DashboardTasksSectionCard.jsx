@@ -53,7 +53,7 @@ export default function DashboardTasksSectionCard({ task, delay }) {
         </a>
       </div>
       <a
-        className="py-1 px-2 text-sm text-center text-white bg-gradient-to-r from-purple-500 to-indigo-500 border rounded transition duration-300 transform filter hover:brightness-110 hover:-translate-y-1"
+        className="py-1 px-2 text-sm text-center text-white bg-gradient-to-r from-purple-500 to-indigo-500 border rounded transition duration-300 transform filter hover:brightness-110"
         href={task.attachments}
         target="_blank"
         role="button"
