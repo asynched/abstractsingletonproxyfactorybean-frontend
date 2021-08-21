@@ -18,6 +18,7 @@ import DashboardTasksSection from '@components/DashboardTasksSection'
 import DashboardLessonsSection from '@components/DashboardLessonsSection'
 import DashboardDiscordBanner from '@components/DashboardDiscordBanner'
 import DashboardNoticeSection from '@components/DashboardNoticeSection'
+import { getWeekDayAsShortString } from '@helpers/date'
 
 export default function Dashboard() {
   const { dispatch } = useContext(AuthContext)
@@ -26,6 +27,9 @@ export default function Dashboard() {
   const [lessonsData, lessonsError] = useGraphQuery(
     GET_LESSONS_DATA_QUERY,
     'lessonByDay',
+    {
+      day: getWeekDayAsShortString(),
+    },
   )
   const [tasksData, tasksError] = useGraphQuery(GET_TASKS_QUERY, 'allTasks')
   const [noticesData, noticesError] = useGraphQuery(

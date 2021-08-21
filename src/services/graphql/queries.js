@@ -11,8 +11,8 @@ export const GET_USER_DATA_QUERY = gql`
 `
 
 export const GET_LESSONS_DATA_QUERY = gql`
-  query LessonByDay {
-    lessonByDay(day: "QUA") {
+  query LessonByDay($day: String!) {
+    lessonByDay(day: $day) {
       id
       url
       schedule

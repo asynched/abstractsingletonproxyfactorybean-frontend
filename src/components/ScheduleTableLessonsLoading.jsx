@@ -1,4 +1,4 @@
-export default function ScheduleTableClassesLoading() {
+export default function ScheduleTableLessonsLoading() {
   return (
     <tr>
       <td

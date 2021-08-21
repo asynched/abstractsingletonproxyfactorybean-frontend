@@ -1,8 +1,8 @@
 import { Fragment } from 'react'
-import ScheduleTableClassesLoading from './ScheduleTableClassesLoading'
-import ScheduleTableClassesRow from './ScheduleTableClassesRow'
+import ScheduleTableLessonsLoading from './ScheduleTableLessonsLoading'
+import ScheduleTableLessonsRow from './ScheduleTableLessonsRow'
 
-export default function ScheduleTableClasses({ lessons }) {
+export default function ScheduleTableLessons({ lessons }) {
   return (
     <div className="overflow-auto">
       <table className="w-full overflow-hidden rounded-lg">
@@ -19,17 +19,17 @@ export default function ScheduleTableClasses({ lessons }) {
         <tbody>
           {lessons ? (
             <Fragment>
-              <ScheduleTableClassesRow
+              <ScheduleTableLessonsRow
                 schedule="19:10 - 20:25"
                 lessons={lessons}
               />
-              <ScheduleTableClassesRow
+              <ScheduleTableLessonsRow
                 schedule="20:45 - 22:00"
                 lessons={lessons}
               />
             </Fragment>
           ) : (
-            <ScheduleTableClassesLoading />
+            <ScheduleTableLessonsLoading />
           )}
         </tbody>
       </table>
