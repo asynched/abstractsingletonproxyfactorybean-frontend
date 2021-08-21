@@ -12,6 +12,7 @@ type LessonType {
   subject: SubjectType!
   schedule: String!
   weekDay: LessonWeekday!
+  url: String!
 }
 
 enum LessonWeekday {
@@ -38,7 +39,7 @@ type NoticeType {
   id: UUID!
   title: String!
   text: String!
-  subject: SubjectType!
+  teacher: TeacherType!
 }
 
 type ObtainJSONWebToken {
@@ -48,6 +49,7 @@ type ObtainJSONWebToken {
 }
 
 type Query {
+  getSelf: UserType
   allNotices: [NoticeType]
   notice(uuid: UUID!): NoticeType
   allResources: [ResourceType]
@@ -90,7 +92,6 @@ type SubjectType {
   teacher: TeacherType!
   lessonSet: [LessonType!]!
   resourceSet: [ResourceType!]!
-  noticeSet: [NoticeType!]!
 }
 
 type TaskType {
@@ -110,9 +111,16 @@ type TeacherType {
   about: String!
   taskSet: [TaskType!]!
   subjectSet: [SubjectType!]!
+  noticeSet: [NoticeType!]!
 }
 
 scalar UUID
+
+type UserType {
+  username: String!
+  firstName: String!
+  lastName: String!
+}
 
 type Verify {
   payload: GenericScalar!

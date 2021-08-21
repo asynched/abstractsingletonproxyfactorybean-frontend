@@ -11,7 +11,7 @@ export const GET_USER_DATA_QUERY = gql`
 `
 
 export const GET_LESSONS_DATA_QUERY = gql`
-  query {
+  query LessonByDay {
     lessonByDay(day: "QUA") {
       id
       url
@@ -29,7 +29,7 @@ export const GET_LESSONS_DATA_QUERY = gql`
 `
 
 export const GET_TASKS_QUERY = gql`
-  query {
+  query AllTasks {
     allTasks {
       id
       title
@@ -45,7 +45,7 @@ export const GET_TASKS_QUERY = gql`
 `
 
 export const GET_NOTICES_QUERY = gql`
-  query {
+  query AllNotices {
     allNotices {
       id
       title
