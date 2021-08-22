@@ -11,6 +11,7 @@ import Tasks from '@pages/Tasks'
 import Register from '@pages/Register'
 import Schedule from '@pages/Schedule'
 import NotFound from '@pages/NotFound'
+import Teacher from '@pages/Teacher'
 
 export default function Routes() {
   return (
@@ -31,6 +32,11 @@ export default function Routes() {
         <PrivateRoute
           path="/schedule"
           component={Schedule}
+          permissionHandler={checkUserPermission}
+        />
+        <PrivateRoute
+          path="/teachers/:id"
+          component={Teacher}
           permissionHandler={checkUserPermission}
         />
         <PrivateRoute

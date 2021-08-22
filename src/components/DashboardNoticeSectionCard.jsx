@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export default function DashboardNoticeSectionCard({ notice }) {
   return (
     <div className="p-4 flex flex-col border rounded-lg" key={notice.id}>
-      <h1 className="mb-2 text-2xl font-bold tracking-tighter">
+      <h1 className="mb-2 text-3xl font-bold tracking-tighter">
         {notice.title}
       </h1>
       <p className="mb-4 text-gray-700">{notice.text}</p>

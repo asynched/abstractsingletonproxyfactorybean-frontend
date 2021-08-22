@@ -91,3 +91,19 @@ export const GET_TASK_QUERY = gql`
     }
   }
 `
+export const GET_TEACHER_QUERY = gql`
+  query Teacher($uuid: UUID!) {
+    teacher(uuid: $uuid) {
+      id
+      name
+      imageUrl
+      email
+      about
+      subjectSet {
+        id
+        name
+        description
+      }
+    }
+  }
+`

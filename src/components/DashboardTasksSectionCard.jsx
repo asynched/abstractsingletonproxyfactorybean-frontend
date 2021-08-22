@@ -1,66 +1,41 @@
+import { formatDate } from '@helpers/dates'
 import '@utils/types'
-import { motion } from 'framer-motion'
 
 /**
  *
  * @param {DashboardTasksSectionCardType} props
  * @returns
  */
-export default function DashboardTasksSectionCard({ task, delay }) {
-  const parseDate = date => date.split('-').reverse().join('/')
-
-  const animation = {
-    initial: {
-      opacity: 0,
-      y: 64,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-    },
-  }
-
+export default function DashboardTasksSectionCard({ task }) {
   return (
-    <motion.div
-      initial={animation.initial}
-      animate={animation.animate}
-      transition={{ delay: delay / 1000, type: 'tween' }}
-      className="py-2 px-4 flex flex-col gap-2 border rounded-lg transition duration-300 transform hover:-translate-y-1 hover:shadow-lg"
-      key={task.id}
-    >
-      <a
-        className="text-2xl font-bold tracking-tighter transition-all hover:text-purple-600"
-        href={`/tasks/${task.id}`}
-      >
-        {task.title}
-      </a>
-      {/* <p>{task.description}</p> */}
-      <p>
-        <span className="font-semibold">Data de entrega:</span>{' '}
-        {parseDate(task.dueDate)}
-      </p>
-      <div className="flex items-center gap-2">
-        <img
-          src={task.teacher.imageUrl}
-          alt={task.teacher.name}
-          className="w-6 h-6 object-cover rounded-full"
-        />
-        <a
-          className="text-purple-600 hover:underline"
-          href={`teachers/${task.teacher.id}`}
-        >
-          {task.teacher.name}
-        </a>
+    <div className="p-4 flex gap-4 rounded-lg border" key={task.id}>
+      <img
+        src={task.teacher.imageUrl}
+        alt={task.teacher.name}
+        className="w-16 h-16 rounded-full object-cover"
+      />
+      <div className="flex-1">
+        <h2 className="text-2xl font-bold tracking-tighter">{task.title}</h2>
+        <h3 className="text-lg font-semibold">{task.teacher.name}</h3>
+        <p className="mb-2">Data de entrega: {formatDate(task.dueDate)}</p>
+        <div className="grid grid-cols-2 gap-2">
+          <a
+            href={task.attachments}
+            target="_blank"
+            className="py-2 text-sm block text-center text-purple-600 font-semibold border border-purple-600 transition rounded hover:bg-purple-600 hover:text-white hover:border-transparent"
+          >
+            Anexos
+          </a>
+          <a
+            href={`/tasks/${task.id}`}
+            target="_blank"
+            className="py-2 text-sm block text-center bg-purple-600 text-white font-semibold rounded"
+          >
+            Ver mais
+          </a>
+        </div>
       </div>
-      <a
-        className="py-1 px-2 text-sm text-center text-white bg-gradient-to-r from-purple-500 to-indigo-500 border rounded transition duration-300 transform filter hover:brightness-110"
-        href={task.attachments}
-        target="_blank"
-        role="button"
-      >
-        Anexos
-      </a>
-    </motion.div>
+    </div>
   )
 }
 
