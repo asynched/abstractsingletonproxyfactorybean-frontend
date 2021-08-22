@@ -51,6 +51,7 @@ export const GET_NOTICES_QUERY = gql`
       title
       text
       teacher {
+        id
         name
         imageUrl
       }

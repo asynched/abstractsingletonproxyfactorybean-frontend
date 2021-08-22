@@ -11,7 +11,7 @@ export default function DashboardLessonsSection({ lessons }) {
           ))}
         </div>
       ) : (
-        <div className="mb-8 w-full p-12 border-2 border-dashed rounded-lg">
+        <div className="mb-8 w-full p-12 border-2 border-dashed rounded-lg transition hover:border-transparent hover:shadow-lg">
           <h1 className="text-gray-400 text-2xl text-center ">
             Sem aulas hoje! 🙌
           </h1>

@@ -18,7 +18,7 @@ import DashboardTasksSection from '@components/DashboardTasksSection'
 import DashboardLessonsSection from '@components/DashboardLessonsSection'
 import DashboardDiscordBanner from '@components/DashboardDiscordBanner'
 import DashboardNoticeSection from '@components/DashboardNoticeSection'
-import { getWeekDayAsShortString } from '@helpers/date'
+import { getWeekDayAsShortString } from '@helpers/dates'
 
 export default function Dashboard() {
   const { dispatch } = useContext(AuthContext)

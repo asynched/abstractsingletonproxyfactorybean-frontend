@@ -4,7 +4,7 @@ export default function DashboardLessonsSectionCard({ lesson }) {
       href={lesson.url}
       target="_blank"
       key={lesson.id}
-      className="py-2 px-4 border rounded transition transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+      className="group pt-3 pb-4 px-6 border rounded-lg transition hover:bg-purple-500 hover:text-white"
     >
       <h2 className="text-2xl font-bold tracking-tighter">
         {lesson.subject.name}
@@ -14,7 +14,7 @@ export default function DashboardLessonsSectionCard({ lesson }) {
       </p>
       <div className="flex items-center gap-2">
         <img
-          className="w-6 h-6 rounded-full"
+          className="w-6 h-6 rounded-full transition transform group-hover:border-2 group-hover:border-white group-hover:scale-125"
           src={lesson.subject.teacher.imageUrl}
           alt={lesson.subject.teacher.name}
         />
