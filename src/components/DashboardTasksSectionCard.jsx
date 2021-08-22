@@ -15,7 +15,7 @@ export default function DashboardTasksSectionCard({ task }) {
       <img
         src={task.teacher.imageUrl}
         alt={task.teacher.name}
-        className="hidden xl:block w-32 h-full object-cover rounded-l-lg"
+        className="hidden sm:block md:hidden xl:block w-32 h-full object-cover rounded-l-lg"
       />
       <div className="p-4 flex-1">
         <h2 className="text-2xl font-bold tracking-tighter">{task.title}</h2>
@@ -31,7 +31,6 @@ export default function DashboardTasksSectionCard({ task }) {
           </a>
           <a
             href={`/tasks/${task.id}`}
-            target="_blank"
             className="py-2 text-sm block text-center bg-purple-600 text-white font-semibold rounded"
           >
             Ver mais

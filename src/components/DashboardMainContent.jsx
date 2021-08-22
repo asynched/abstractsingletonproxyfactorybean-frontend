@@ -7,6 +7,7 @@ import DashboardTasksSection from './DashboardTasksSection'
 
 import DashboardGithubBanner from './DashboardGithubBanner'
 import DashboardBannerSection from './DashboardBannerSection'
+import DashboardStatusSection from './DashboardStatusSection'
 
 export default function DashboardMainContent() {
   return (
@@ -17,6 +18,7 @@ export default function DashboardMainContent() {
       </DashboardLeftContainer>
       <DashboardRightContainer>
         <DashboardLessonsSection />
+        <DashboardStatusSection />
         <DashboardBannerSection>
           <DashboardGithubBanner />
           <DashboardDiscordBanner />

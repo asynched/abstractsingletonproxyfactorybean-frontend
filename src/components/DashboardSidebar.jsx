@@ -41,7 +41,7 @@ export default function DashboardSidebar() {
   ]
 
   return (
-    <nav className="absolute h-16 w-full bottom-0 z-10 flex items-center bg-gray-900 md:static md:h-screen md:w-16 md:flex-col">
+    <nav className="absolute h-16 w-full bottom-0 z-50 flex items-center bg-gray-900 md:static md:h-screen md:w-16 md:flex-col">
       {sidebarElements.map(element => (
         <DashboardSidebarItem
           key={element.tooltip}

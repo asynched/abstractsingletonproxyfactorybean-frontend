@@ -4,13 +4,13 @@ import ScheduleTableLessonsRow from './ScheduleTableLessonsRow'
 
 export default function ScheduleTableLessons({ lessons }) {
   return (
-    <div className="overflow-auto shadow-xl rounded-lg">
-      <table className="w-full overflow-hidden rounded-lg">
+    <div className="relative rounded-lg">
+      <table className="relative z-10 w-full bg-gray-100 overflow-hidden rounded-lg shadow-lg">
         <thead>
           <tr className="text-left text-white bg-gradient-to-r from-purple-600 to-indigo-600">
             <th
               colSpan={6}
-              className="py-2 px-4 font-semibold text-center text-lg"
+              className="py-2 px-4 font-bold text-center text-xl tracking-tighter"
             >
               Horários
             </th>
@@ -41,6 +41,7 @@ export default function ScheduleTableLessons({ lessons }) {
           )}
         </tbody>
       </table>
+      <div className="absolute top-0 w-full h-full bg-gradient-to-r from-indigo-600 to-blue-600 transform rotate-1 rounded-lg"></div>
     </div>
   )
 }
