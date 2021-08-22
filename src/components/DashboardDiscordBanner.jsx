@@ -1,20 +1,19 @@
 export default function DashboardDiscordBanner() {
   return (
-    <div className="p-8 text-white bg-gradient-to-r from-gray-700 to-gray-900 rounded-lg shadow-xl">
-      <h1 className="mb-2 text-4xl font-bold tracking-tighter">
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
-          Também estamos no Discord!
-        </span>{' '}
-        👾
+    <a
+      className="relative p-8 flex flex-col justify-center border rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white"
+      href="https://discord.gg/xFX22C5UPe"
+      target="_blank"
+    >
+      <h1 className="text-4xl font-bold tracking-tighter">
+        Também estamos no Discord!
       </h1>
-      <p className="mb-3 text-lg text-gray-300">Venha conversar com a gente!</p>
-      <a
-        className="text-purple-400 hover:underline"
-        href="https://discord.gg/xFX22C5UPe"
-        target="_blank"
-      >
-        Acesse através desse link
-      </a>
-    </div>
+      <p className="relative z-10 text-lg">Venha conversar com a gente!</p>
+      <img
+        className="absolute h-24 right-[1rem] bottom-0 opacity-50"
+        src="https://discord.com/assets/c40c84ca18d84633a9d86b4046a91437.svg"
+        alt="null"
+      />
+    </a>
   )
 }

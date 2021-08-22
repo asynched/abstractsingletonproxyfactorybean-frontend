@@ -27,7 +27,8 @@ export default function DashboardHeading() {
         {greetingMessage}, <span className="font-bold">{user.firstName}!</span>{' '}
         👋
       </h1>
-      <p>{currentTime}</p>
+      <p>Bom ter você aqui! 😸</p>
+      <p className="text-lg tracking-wide">{currentTime}</p>
     </div>
   )
 }

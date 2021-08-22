@@ -8,17 +8,20 @@ import '@utils/types'
  */
 export default function DashboardTasksSectionCard({ task }) {
   return (
-    <div className="p-4 flex gap-4 rounded-lg border" key={task.id}>
+    <div
+      className="flex md:flex-col lg:flex-row gap-4 rounded-lg border"
+      key={task.id}
+    >
       <img
         src={task.teacher.imageUrl}
         alt={task.teacher.name}
-        className="w-16 h-16 rounded-full object-cover"
+        className="hidden xl:block w-32 h-full object-cover rounded-l-lg"
       />
-      <div className="flex-1">
+      <div className="p-4 flex-1">
         <h2 className="text-2xl font-bold tracking-tighter">{task.title}</h2>
-        <h3 className="text-lg font-semibold">{task.teacher.name}</h3>
+        <h3 className="font-semibold">{task.teacher.name}</h3>
         <p className="mb-2">Data de entrega: {formatDate(task.dueDate)}</p>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid lg:grid-cols-2 gap-2">
           <a
             href={task.attachments}
             target="_blank"

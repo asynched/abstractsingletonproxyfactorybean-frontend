@@ -5,6 +5,9 @@ import DashboardNoticeSection from './DashboardNoticeSection'
 import DashboardRightContainer from './DashboardRightContainer'
 import DashboardTasksSection from './DashboardTasksSection'
 
+import DashboardGithubBanner from './DashboardGithubBanner'
+import DashboardBannerSection from './DashboardBannerSection'
+
 export default function DashboardMainContent() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
@@ -14,7 +17,10 @@ export default function DashboardMainContent() {
       </DashboardLeftContainer>
       <DashboardRightContainer>
         <DashboardLessonsSection />
-        <DashboardDiscordBanner />
+        <DashboardBannerSection>
+          <DashboardGithubBanner />
+          <DashboardDiscordBanner />
+        </DashboardBannerSection>
       </DashboardRightContainer>
     </div>
   )
