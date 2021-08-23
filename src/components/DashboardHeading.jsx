@@ -22,13 +22,15 @@ export default function DashboardHeading() {
   }, [currentTime])
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 flex items-center justify-between">
       <h1 className="text-4xl tracking-tighter">
         {greetingMessage}, <span className="font-bold">{user.firstName}!</span>{' '}
         👋
       </h1>
-      <p>Bom ter você aqui! 😸</p>
-      <p className="text-lg tracking-wide">{currentTime}</p>
+      <div>
+        <p>Bom ter você aqui! 😸</p>
+        <p className="text-lg tracking-wide">{currentTime}</p>
+      </div>
     </div>
   )
 }

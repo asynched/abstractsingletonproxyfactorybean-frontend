@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function DashboardStatusCard({ status }) {
   return (
     <div
