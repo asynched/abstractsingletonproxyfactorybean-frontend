@@ -1,4 +1,4 @@
-export default function DashboardStatusCard({ status }) {
+export default function DashboardStatusSectionCard({ status }) {
   return (
     <div
       className={`relative py-4 px-6 text-white bg-gradient-to-br from-${status.color}-500 to-${status.color}-600 rounded-lg shadow-lg transition duration-300 transform hover:-translate-y-1`}

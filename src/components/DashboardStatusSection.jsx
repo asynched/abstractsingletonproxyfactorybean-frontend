@@ -1,4 +1,4 @@
-import DashboardStatusCard from './DashboardStatusCard'
+import DashboardStatusSectionCard from './DashboardStatusSectionCard'
 
 export default function DashboardStatusSection() {
   const status = [
@@ -27,7 +27,7 @@ export default function DashboardStatusSection() {
       <h2 className="mb-4 text-4xl font-bold tracking-tighter">Status</h2>
       <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-4">
         {status.map(item => (
-          <DashboardStatusCard status={item} />
+          <DashboardStatusSectionCard key={item.key} status={item} />
         ))}
       </div>
     </div>
