@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import DashboardSidebarItemTooltip from './DashboardSidebarItemTooltip'
+import TheSidebarItemTooltip from './TheSidebarItemTooltip'
 
 /**
  *
- * @param {DashboardSidebarItemProps} props
+ * @param {TheSidebarItemProps} props
  * @returns
  */
-export default function DashboardSidebarItem({
+export default function TheSidebarItem({
   icon,
   tooltip,
   className,
@@ -25,13 +25,13 @@ export default function DashboardSidebarItem({
       onClick={() => callback && callback()}
     >
       {icon}
-      <DashboardSidebarItemTooltip text={tooltip} />
+      <TheSidebarItemTooltip text={tooltip} />
     </Link>
   )
 }
 
 /**
- * @typedef DashboardSidebarItemProps
+ * @typedef TheSidebarItemProps
  *
  * @property {JSX.Element} icon Item icon
  * @property {string} tooltip Item tooltip text

@@ -1,4 +1,4 @@
-import DashboardSidebarItem from '@components/DashboardSidebarItem'
+import TheSidebarItem from '@components/TheSidebarItem'
 
 import {
   BookmarkAltIcon,
@@ -12,7 +12,7 @@ import { clearTokenFromLocalStorage } from '@lib/local-storage'
 /**
  * @returns A sidebar element for the pages that follow the dashboard layout
  */
-export default function DashboardSidebar() {
+export default function TheSidebar() {
   const sidebarElements = [
     {
       icon: ViewGridIcon,
@@ -43,7 +43,7 @@ export default function DashboardSidebar() {
   return (
     <nav className="absolute h-16 w-full bottom-0 z-50 flex items-center bg-gray-900 md:static md:h-screen md:w-16 md:flex-col">
       {sidebarElements.map(element => (
-        <DashboardSidebarItem
+        <TheSidebarItem
           key={element.tooltip}
           icon={<element.icon className="w-8 h-8" />}
           tooltip={element.tooltip}
@@ -51,7 +51,7 @@ export default function DashboardSidebar() {
           url={element.url}
         />
       ))}
-      <DashboardSidebarItem
+      <TheSidebarItem
         className={'ml-auto md:mt-auto'}
         icon={<LogoutIcon className="w-8 h-8" />}
         tooltip={'Sair'}
