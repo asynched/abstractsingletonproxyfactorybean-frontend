@@ -3,6 +3,20 @@ schema {
   mutation: Mutation
 }
 
+type AttachmentType {
+  id: UUID!
+  name: String!
+  description: String!
+  url: String!
+  task: TaskType!
+}
+
+type CourseStatus {
+  tasks: Int
+  notices: Int
+  resources: Int
+}
+
 scalar Date
 
 scalar GenericScalar
@@ -49,6 +63,8 @@ type ObtainJSONWebToken {
 }
 
 type Query {
+  courseStatus: CourseStatus
+  allAttachments: [AttachmentType]
   getSelf: UserType
   allNotices: [NoticeType]
   notice(uuid: UUID!): NoticeType
@@ -98,9 +114,9 @@ type TaskType {
   id: UUID!
   title: String!
   description: String!
-  attachments: String!
   teacher: TeacherType!
   dueDate: Date!
+  attachmentSet: [AttachmentType!]!
 }
 
 type TeacherType {
@@ -109,6 +125,7 @@ type TeacherType {
   imageUrl: String!
   email: String!
   about: String!
+  sharedFolder: String
   taskSet: [TaskType!]!
   subjectSet: [SubjectType!]!
   noticeSet: [NoticeType!]!

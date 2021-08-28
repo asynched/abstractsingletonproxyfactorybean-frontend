@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function TaskContentSectionTeacher({ teacher }) {
   return (
     <div className="col-span-1">
@@ -9,7 +11,12 @@ export default function TaskContentSectionTeacher({ teacher }) {
         />
         <div>
           <h1 className="text-4xl font-bold tracking-tighter">Professor</h1>
-          <h2 className="text-2xl tracking-tighter">{teacher.name}</h2>
+          <Link
+            to={`/teachers/${teacher.id}`}
+            className="text-2xl tracking-tighter text-purple-600 hover:underline"
+          >
+            {teacher.name}
+          </Link>
         </div>
       </div>
       <hr />

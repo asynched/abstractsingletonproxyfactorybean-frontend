@@ -1,3 +1,5 @@
+import { formatDate } from '@helpers/dates'
+
 export default function TaskContentSectionInfo({ task }) {
   return (
     <div className="pr-4 col-span-3 lg:border-r">
@@ -10,7 +12,7 @@ export default function TaskContentSectionInfo({ task }) {
         <h1 className="mb-4 text-4xl font-bold tracking-tighter">
           Data máxima
         </h1>
-        <p className="text-xl">{task.dueDate}</p>
+        <p className="text-xl">{formatDate(task.dueDate)}</p>
       </div>
       <hr />
       <div className="my-4">

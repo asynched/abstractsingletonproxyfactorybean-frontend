@@ -27,9 +27,16 @@ export default function DashboardHeading() {
         {greetingMessage}, <span className="font-bold">{user.firstName}!</span>{' '}
         👋
       </h1>
-      <div>
-        <p>Bom ter você aqui! 😸</p>
-        <p className="text-lg tracking-wide">{currentTime}</p>
+      <div className="flex items-center gap-4">
+        <img
+          src={`https://avatars.dicebear.com/api/identicon/${user.firstName}.svg`}
+          alt={user.username}
+          className="w-12 h-12 rounded-full"
+        />
+        <div>
+          <p>Bom ter você aqui! 😸</p>
+          <p className="text-lg tracking-wide">{currentTime}</p>
+        </div>
       </div>
     </div>
   )

@@ -3,7 +3,7 @@ import GitHubLogo from '@assets/github.svg'
 export default function DashboardGithubBanner() {
   return (
     <a
-      className="relative flex flex-col justify-center bg-gray-900 rounded-lg p-8 text-white transition-shadow hover:shadow-lg"
+      className="relative flex flex-col justify-center bg-gray-900 rounded-lg p-8 text-white transform transition duration-300 hover:-translate-y-1"
       href="https://github.com/Nxrth-x/abstractsingletonproxyfactorybean-frontend"
       target="_blank"
     >

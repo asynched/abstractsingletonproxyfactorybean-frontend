@@ -33,7 +33,6 @@ export const GET_TASKS_QUERY = gql`
     allTasks {
       id
       title
-      attachments
       dueDate
       teacher {
         id
@@ -79,7 +78,6 @@ export const GET_TASK_QUERY = gql`
       id
       title
       description
-      attachments
       dueDate
       teacher {
         id
@@ -87,6 +85,12 @@ export const GET_TASK_QUERY = gql`
         imageUrl
         email
         about
+      }
+      attachmentSet {
+        id
+        name
+        description
+        url
       }
     }
   }
@@ -104,6 +108,16 @@ export const GET_TEACHER_QUERY = gql`
         name
         description
       }
+    }
+  }
+`
+
+export const GET_COURSE_STATUS_QUERY = gql`
+  query CourseStatus {
+    courseStatus {
+      tasks
+      notices
+      resources
     }
   }
 `
