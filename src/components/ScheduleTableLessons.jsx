@@ -41,7 +41,7 @@ export default function ScheduleTableLessons({ lessons }) {
           )}
         </tbody>
       </table>
-      <div className="absolute top-0 w-full h-full bg-gradient-to-r from-indigo-600 to-blue-600 transform rotate-1 rounded-lg"></div>
+      <div className="absolute top-0 w-full h-full bg-gradient-to-r from-gray-700 to-gray-800 transform rotate-1 rounded-lg"></div>
     </div>
   )
 }

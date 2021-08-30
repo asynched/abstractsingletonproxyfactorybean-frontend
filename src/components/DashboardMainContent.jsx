@@ -11,18 +11,18 @@ import DashboardStatusSection from './DashboardStatusSection'
 
 export default function DashboardMainContent() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-6 gap-4">
       <DashboardLeftContainer>
-        <DashboardTasksSection />
-        <DashboardNoticeSection />
-      </DashboardLeftContainer>
-      <DashboardRightContainer>
         <DashboardLessonsSection />
         <DashboardStatusSection />
         <DashboardBannerSection>
           <DashboardGithubBanner />
           <DashboardDiscordBanner />
         </DashboardBannerSection>
+      </DashboardLeftContainer>
+      <DashboardRightContainer>
+        <DashboardTasksSection />
+        <DashboardNoticeSection />
       </DashboardRightContainer>
     </div>
   )

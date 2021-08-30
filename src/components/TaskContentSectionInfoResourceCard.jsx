@@ -1,4 +1,4 @@
-export default function TaskContentSectionInfoAttachmentCard({ attachment }) {
+export default function TaskContentSectionInfoResourceCard({ attachment }) {
   return (
     <div class="p-4 border rounded-lg">
       <h1 className="mb-2 text-2xl font-bold tracking-tighter">

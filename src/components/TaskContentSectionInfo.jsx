@@ -1,6 +1,6 @@
 import { formatDate } from '@helpers/dates'
-import TaskContentSectionInfoAttachmentCard from './TaskContentSectionInfoAttachmentCard'
-import TaskContentSectionInfoNoAttachmentsCard from './TaskContentSectionInfoNoAttachmentsCard'
+import TaskContentSectionInfoResourceCard from './TaskContentSectionInfoResourceCard'
+import TaskContentSectionInfoNoAttachmentsCard from './TaskContentSectionInfoNoResourcesCard'
 
 export default function TaskContentSectionInfo({ task }) {
   return (
@@ -20,10 +20,10 @@ export default function TaskContentSectionInfo({ task }) {
       <hr />
       <div className="my-4">
         <h1 className="mb-4 text-4xl font-bold tracking-tighter">Anexos</h1>
-        <div className="grid grid-cols-2">
-          {task.attachmentSet?.length > 0 ? (
-            task.attachmentSet.map(attachment => (
-              <TaskContentSectionInfoAttachmentCard
+        <div className="grid grid-cols-2 gap-4">
+          {task.resourceSet?.length > 0 ? (
+            task.resourceSet.map(attachment => (
+              <TaskContentSectionInfoResourceCard
                 attachment={attachment}
                 key={attachment.id}
               />

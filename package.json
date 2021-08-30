@@ -1,6 +1,6 @@
 {
-  "name": "abstract-singleton-proxy-factory-bean",
-  "version": "0.0.1",
+  "name": "aspfb-frontend",
+  "version": "0.0.5",
   "license": "MIT",
   "scripts": {
     "dev": "vite",

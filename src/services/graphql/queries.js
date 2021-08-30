@@ -86,7 +86,7 @@ export const GET_TASK_QUERY = gql`
         email
         about
       }
-      attachmentSet {
+      resourceSet {
         id
         name
         description
@@ -103,6 +103,7 @@ export const GET_TEACHER_QUERY = gql`
       imageUrl
       email
       about
+      sharedFolder
       subjectSet {
         id
         name
