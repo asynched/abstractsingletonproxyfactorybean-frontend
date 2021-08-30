@@ -1,8 +1,11 @@
-import { useParams } from 'react-router-dom'
-import useGraphQuery from '@hooks/useGraphQuery'
-import MainLayout from '@layouts/MainLayout'
-import { GET_TEACHER_QUERY } from '@services/graphql/queries'
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+
+import { GET_TEACHER_QUERY } from '@services/graphql/queries'
+import useGraphQuery from '@hooks/useGraphQuery'
+import useToastError from '@hooks/useToastError'
+
+import MainLayout from '@layouts/MainLayout'
 import LoadingContainer from '@components/LoadingContainer'
 import TeacherBannerSection from '@components/TeacherBannerSection'
 import TeacherHeadingInfo from '@components/TeacherHeadingInfo'
@@ -20,6 +23,7 @@ export default function Teacher() {
     },
   )
 
+  useToastError(teacherError, 'Erro ao buscar os dados do professor')
   useEffect(() => console.log(teacherData), [teacherData])
 
   return (

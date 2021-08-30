@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 
 import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
-import { showErrorToast, showSuccessToast } from '@lib/toast-events'
-import FormInputField from '@components/FormInputField'
 import { useMutation } from '@apollo/client'
 import { REGISTER_MUTATION } from '@services/graphql/mutations'
+
 import useToastError from '@hooks/useToastError'
 import { useToastSuccess } from '@hooks/useToastSuccess'
+import FormInputField from '@components/FormInputField'
 
 const INITIAL_STATE = {
   username: '',

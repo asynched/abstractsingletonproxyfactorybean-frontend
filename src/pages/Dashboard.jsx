@@ -1,11 +1,6 @@
 import { useContext, useEffect } from 'react'
 
-import {
-  GET_LESSONS_DATA_QUERY,
-  GET_NOTICES_QUERY,
-  GET_TASKS_QUERY,
-  GET_USER_DATA_QUERY,
-} from '@services/graphql/queries'
+import { GET_USER_DATA_QUERY } from '@services/graphql/queries'
 import { dispatchAction } from '@lib/dispatch'
 
 import useGraphQuery from '@hooks/useGraphQuery'

@@ -1,15 +1,15 @@
 import { useReducer, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useMutation } from '@apollo/client'
 
-import useToastError from '@hooks/useToastError'
 import { dispatchAction } from '@lib/dispatch'
 import { preventDefault } from '@lib/ui-events'
 import { authStateChanged } from '@events/auth'
+import { LOGIN_MUTATION } from '@services/graphql/mutations'
+import useToastError from '@hooks/useToastError'
 
 import FormInputField from '@components/FormInputField'
-import { useMutation } from '@apollo/client'
-import { LOGIN_MUTATION } from '@services/graphql/mutations'
 
 const INITIAL_STATE = {
   username: '',

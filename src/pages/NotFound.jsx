@@ -1,5 +1,6 @@
-import MainLayout from '@layouts/MainLayout'
 import { Link } from 'react-router-dom'
+
+import MainLayout from '@layouts/MainLayout'
 
 export default function NotFound() {
   return (
