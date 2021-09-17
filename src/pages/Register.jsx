@@ -1,46 +1,29 @@
-import { useReducer } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { motion } from 'framer-motion'
-
-import { dispatchAction } from '@lib/dispatch'
-import { preventDefault } from '@lib/ui-events'
 import { useMutation } from '@apollo/client'
+
 import { REGISTER_MUTATION } from '@services/graphql/mutations'
-
+import { preventDefault } from '@lib/ui-events'
+import useFormFields from '@hooks/useFormFields'
 import useToastError from '@hooks/useToastError'
-import { useToastSuccess } from '@hooks/useToastSuccess'
+import useToastSuccess from '@hooks/useToastSuccess'
+
 import FormInputField from '@components/FormInputField'
-
-const INITIAL_STATE = {
-  username: '',
-  firstName: '',
-  lastName: '',
-  password: '',
-}
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'set/username':
-      return { ...state, username: action.payload }
-    case 'set/firstName':
-      return { ...state, firstName: action.payload }
-    case 'set/lastName':
-      return { ...state, lastName: action.payload }
-    case 'set/password':
-      return { ...state, password: action.payload }
-  }
-}
 
 export default function Register() {
   const history = useHistory()
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
+  const [formFields, registerField] = useFormFields({
+    username: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+  })
   const [registerUser, { error, data }] = useMutation(REGISTER_MUTATION)
 
   const handleSubmit = async () => {
-    registerUser({ variables: state })
+    registerUser({ variables: formFields })
   }
 
-  useToastError(error, 'Erro ao tentar se cadastrar, verifique as credenciais')
+  useToastError(error, 'Erro ao tentar se cadastrar, verifique as credenciais.')
 
   useToastSuccess(data, 'Cadastrado com sucesso, redirecionando.', () => {
     setTimeout(() => {
@@ -51,16 +34,11 @@ export default function Register() {
   return (
     <div className="w-full h-screen grid text-gray-800 lg:grid-cols-5">
       <div className="col-span-3 hidden lg:flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600">
-        <motion.h1
-          initial={{ opacity: 0, x: -128 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-4xl text-white font-bold text-center tracking-tighter"
-        >
+        <h1 className="text-4xl text-white font-bold text-center tracking-tighter">
           Abstract Singleton Proxy
           <br />
           Factory Bean
-        </motion.h1>
+        </h1>
       </div>
       <div className="col-span-2 flex flex-col items-center justify-center">
         <form
@@ -76,52 +54,37 @@ export default function Register() {
           <FormInputField
             label="Nome de usuário"
             placeholder="Nome de usuário"
-            value={state.username}
             pattern="^[a-zA-Z0-9]{5,}$"
             title="Nome de usuário contendo apenas letras e números"
             required
-            changeHandler={value =>
-              dispatchAction(dispatch, 'set/username', value)
-            }
+            {...registerField('username')}
           />
           <div className="my-4 grid grid-cols-2 gap-4">
             <FormInputField
               label="Nome"
               placeholder="Nome"
-              delay={300}
               pattern="^[^\s]{3,16}$"
               title="Primeiro nome sem espaços"
               required
-              value={state.firstName}
-              changeHandler={value =>
-                dispatchAction(dispatch, 'set/firstName', value)
-              }
+              {...registerField('firstName')}
             />
             <FormInputField
               label="Sobrenome"
               placeholder="Sobrenome"
-              delay={450}
-              value={state.lastName}
               pattern="^[^\s]{3,16}$"
               title="Sobrenome nome sem espaços"
               required
-              changeHandler={value =>
-                dispatchAction(dispatch, 'set/lastName', value)
-              }
+              {...registerField('lastName')}
             />
           </div>
           <FormInputField
             label="Senha"
             placeholder="Senha"
             type="password"
-            delay={600}
-            value={state.password}
             pattern="(.){8,}"
             title="Senha com no mínimo 8 caracteres"
             required
-            changeHandler={value =>
-              dispatchAction(dispatch, 'set/password', value)
-            }
+            {...registerField('password')}
           />
           <button
             className="mt-8 py-2 w-full text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded"

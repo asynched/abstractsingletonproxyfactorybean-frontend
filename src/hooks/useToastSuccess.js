@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { showSuccessToast } from '@lib/toast-events'
 
-export const useToastSuccess = (state, message, callback = null) => {
+const useToastSuccess = (state, message, callback = null) => {
   useEffect(() => {
     if (state) {
       console.log(state)
@@ -10,3 +10,5 @@ export const useToastSuccess = (state, message, callback = null) => {
     }
   }, [state])
 }
+
+export default useToastSuccess
